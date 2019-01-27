@@ -4,6 +4,11 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 void Robot::RobotInit() {
+
+    controls = std::make_shared<Controls>();
+    drivetrain = std::make_shared<DriveTrain>();
+    drivecommand = std::make_unique<DriveCommand>(controls, drivetrain);
+    
 }
 
 /**
@@ -46,6 +51,7 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() { frc::Scheduler::GetInstance()->Run(); }
 
 void Robot::TeleopInit() {
+    drivecommand->Start();
 }
 
 void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); }
