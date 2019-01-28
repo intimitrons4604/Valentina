@@ -1,13 +1,16 @@
 #pragma once
 
+#include <memory>
+
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include "subsystems/DriveTrain.h"
+
 #include "Controls.h"
-#include <memory>
 #include "commands/DriveCommand.h"
-class Robot : public frc::TimedRobot {
+#include "subsystems/DriveTrain.h"
+class Robot : public frc::TimedRobot
+{
  public:
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -20,8 +23,7 @@ class Robot : public frc::TimedRobot {
   void TestPeriodic() override;
 
  private:
- std::shared_ptr<Controls> controls;
- std::shared_ptr<DriveTrain> drivetrain;
- std::unique_ptr<DriveCommand> drivecommand;
-
+  std::shared_ptr<Controls> controls;
+  std::shared_ptr<DriveTrain> drivetrain;
+  std::unique_ptr<DriveCommand> drivecommand;
 };
