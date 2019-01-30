@@ -1,34 +1,33 @@
 #include "commands/DriveCommand.h"
 
-DriveCommand::DriveCommand(std::shared_ptr<Controls> controls, std::shared_ptr<DriveTrain> drivetrain)
+DriveCommand::DriveCommand(std::shared_ptr<Controls> controls,
+                           std::shared_ptr<DriveTrain> drivetrain)
     : controls(controls), drivetrain(drivetrain)
 {
-    Requires(drivetrain.get());
+  Requires(drivetrain.get());
 }
 
-void DriveCommand::Initialize(){
-
+void DriveCommand::Initialize()
+{
 }
 
 void DriveCommand::Execute()
 {
-    auto control = controls->Get_ArcadeDrive();
-    drivetrain->ArcadeDrive(control.xSpeed, control.zRotation);
-
-    
+  auto control = controls->Get_ArcadeDrive();
+  drivetrain->ArcadeDrive(control.xSpeed, control.zRotation);
 }
 
-bool DriveCommand::IsFinished(){
-    return false;
-
+bool DriveCommand::IsFinished()
+{
+  return false;
 }
 
-void DriveCommand::End(){
-    drivetrain->Stop();
-
+void DriveCommand::End()
+{
+  drivetrain->Stop();
 }
 
-void DriveCommand::Interrupted(){
-    End();
-
+void DriveCommand::Interrupted()
+{
+  End();
 }
