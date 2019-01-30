@@ -27,5 +27,20 @@ ArcadeControls Controls::Get_ArcadeDrive()
   arcadecontrols.xSpeed = controller1.GetY(JoystickHand::kLeftHand);
   arcadecontrols.zRotation = controller1.GetX(JoystickHand::kRightHand);
 
+  if (abs(arcadecontrols.xSpeed) < 0.05)
+  {
+    arcadecontrols.xSpeed = 0;
+  }
+
+  if (abs(arcadecontrols.zRotation) < 0.05)
+  {
+    arcadecontrols.zRotation = 0;
+  }
+
   return arcadecontrols;
+}
+
+double Controls::deadband(double controller, double deadband)
+{
+  return ((controller - deadband) / (1 - deadband));
 }
