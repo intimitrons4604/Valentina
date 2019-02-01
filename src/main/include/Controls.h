@@ -32,4 +32,6 @@ class Controls
  private:
   frc::XboxController controller1{0};
   double deadband(double controller, double deadband);
+  double cubecontrols(double controller);
+  double adjust(double controller);
 };

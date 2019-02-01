@@ -1,7 +1,8 @@
 #include "Controls.h"
 
 using JoystickHand = frc::GenericHID::JoystickHand;
-
+static constexpr double kDeadband = 0.02;
+//TODO add adjust in tank and curvature drive if we were ever to use them
 TankControls Controls::Get_TankDrive()
 {
   TankControls tankcontrols;
@@ -24,23 +25,32 @@ CurvatureControls Controls::Get_CurvatureDrive()
 ArcadeControls Controls::Get_ArcadeDrive()
 {
   ArcadeControls arcadecontrols;
-  arcadecontrols.xSpeed = controller1.GetY(JoystickHand::kLeftHand);
-  arcadecontrols.zRotation = controller1.GetX(JoystickHand::kRightHand);
-
-  if (abs(arcadecontrols.xSpeed) < 0.05)
-  {
-    arcadecontrols.xSpeed = 0;
-  }
-
-  if (abs(arcadecontrols.zRotation) < 0.05)
-  {
-    arcadecontrols.zRotation = 0;
-  }
+  arcadecontrols.xSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand));
+  arcadecontrols.zRotation = adjust(controller1.GetX(JoystickHand::kRightHand));
 
   return arcadecontrols;
 }
 
 double Controls::deadband(double controller, double deadband)
 {
-  return ((controller - deadband) / (1 - deadband));
+  if (abs(controller) < deadband)
+  {
+    return (0);
+  }
+
+  if (controller < 0)
+  {
+    return -((abs(controller) - deadband) / (1 - deadband));
+  }
+  return ((abs(controller) - deadband) / (1 - deadband));
+}
+
+double Controls::cubecontrols(double controller)
+{
+  return pow(controller, 3);
+}
+double Controls::adjust(double controller)
+{
+  double value = deadband(controller, kDeadband);
+  return cubecontrols(value);
 }
