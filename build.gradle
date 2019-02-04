@@ -4,6 +4,46 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2019.1.1"
 }
 
+/**
+ * Custom rule to enable more compiler warnings despite what compiler arguments the GradleRIO plugin sets.
+ *
+ * This rule is contained inline rather than in buildSrc or an external .gradle file to prevent divergent dependency versions for
+ * 'edu.wpi.first:ToolchainPlugin' (transitively via GradleRIO). It is also here to take advantage of the offline
+ * maven cache (set up in settings.gradle) to prevent build errors due to lack of internet access at competition.
+ */
+class IntimitronsCompilerWarningRules extends RuleSource {
+    @Finalize
+    void modifyCompilerArgs(BinaryContainer binaries) {
+        // GradleRIO only enables some warnings, and suppresses other warnings.
+        // To turn on these warnings and remove the suppressions placed by GradleRIO, we add a rule
+        // that will run after GradleRIO's rule. (GradleRIO uses @Mutate, we use @Finalize).
+        //
+        // See Also:
+        // https://github.com/wpilibsuite/GradleRIO/blob/d0a5cdcabb4113383b2a24a91fe73ab869b7c88c/src/main/groovy/edu/wpi/first/gradlerio/wpi/WPINativeCompileRules.groovy
+        // https://github.com/wpilibsuite/GradleRIO/commit/d0a946a1c9fc52b4afd45b7dc1b128932347b3e9
+
+        binaries.withType(NativeBinarySpec, { NativeBinarySpec bin ->
+            if (bin.targetPlatform.name.equals(edu.wpi.first.toolchain.NativePlatforms.roborio)) {
+                // Default includes '-Wformat=2', '-pedantic', '-Wno-psabi', '-Wno-unused-parameter', '-Wno-error=deprecated-declarations'
+                bin.cppCompiler.args.removeAll {arg ->
+                    arg.startsWith('-W')
+                }
+                bin.cppCompiler.args.remove('-pedantic')
+                bin.cppCompiler.args.addAll(['-Werror', '-Wall', '-Wextra', '-Wpedantic', '-Wformat=2'])
+
+                // Default includes '-Wformat=2', '-Wno-psabi', '-Wno-unused-parameter'
+                bin.cCompiler.args.removeAll {arg ->
+                    arg.startsWith('-W')
+                }
+                bin.cCompiler.args.addAll(['-Werror', '-Wall', '-Wextra', '-Wpedantic', '-Wformat=2'])
+            }
+        })
+    }
+}
+// If this plugin is causing problems with the build, it can be disabled by commenting out this line.
+// If the plugin's code (above) is giving errors, comment out the whole class and this line
+apply plugin: IntimitronsCompilerWarningRules
+
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project EmbeddedTools.
 deploy {
