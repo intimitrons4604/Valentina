@@ -1,0 +1,5 @@
+---
+dist: xenial
+
+script:
+    - ./gradlew clean build
