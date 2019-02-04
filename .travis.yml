@@ -3,7 +3,8 @@ dist: xenial
 language: cpp
 
 script:
-  - ./gradlew --no-daemon --console=plain installRoboRioToolchain clean build
+  - ./gradlew --console=plain installRoboRioToolchain
+  - ./gradlew --console=plain clean build
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
