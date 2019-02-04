@@ -5,3 +5,12 @@ language: cpp
 script:
   - ./gradlew installRoboRioToolchain
   - ./gradlew clean build
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
