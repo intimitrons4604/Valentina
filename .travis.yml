@@ -1,5 +1,7 @@
 ---
 dist: xenial
+language: cpp
 
 script:
-    - ./gradlew clean build
+  - ./gradlew installRoboRioToolchain
+  - ./gradlew clean build
