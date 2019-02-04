@@ -13,4 +13,6 @@ before_cache:
 cache:
   directories:
     - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    # FRC is using this path rather than the standard $HOME/.gradle/wrapper/
+    # See gradle/wrapper/gradle-wrapper.properties
+    - $HOME/.gradle/permwrapper/
