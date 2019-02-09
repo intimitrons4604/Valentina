@@ -8,6 +8,11 @@ void Robot::RobotInit()
   controls = std::make_shared<Controls>();
   drivetrain = std::make_shared<DriveTrain>();
   drivecommand = std::make_unique<DriveCommand>(controls, drivetrain);
+  lift = std::make_shared<Lift>();
+  liftcommand = std::make_unique<LiftCommand>(controls, lift);
+
+  drivetrain->SetDefaultCommand(drivecommand.get());
+  lift->SetDefaultCommand(liftcommand.get());
 }
 
 /**
@@ -58,7 +63,6 @@ void Robot::AutonomousPeriodic()
 
 void Robot::TeleopInit()
 {
-  drivecommand->Start();
 }
 
 void Robot::TeleopPeriodic()

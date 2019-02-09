@@ -1,5 +1,4 @@
 #pragma once
-
 #include <frc/DigitalInput.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/Victor.h>
@@ -11,6 +10,7 @@ class Lift : public frc::Subsystem
   void Up();
   void Down();
   void Stop();
+  Lift();
 
  private:
   frc::Victor left_victor{5};

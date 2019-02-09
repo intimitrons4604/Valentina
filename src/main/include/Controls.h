@@ -22,12 +22,19 @@ struct ArcadeControls
 
 };
 
+enum class LiftControls
+{
+  Stop, Down, Up
+};
+
 class Controls
 {
  public:
   TankControls Get_TankDrive();
   CurvatureControls Get_CurvatureDrive();
   ArcadeControls Get_ArcadeDrive();
+  LiftControls Get_LiftControls();
+
 
  private:
   frc::XboxController controller1{0};

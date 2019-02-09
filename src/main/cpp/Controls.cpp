@@ -4,7 +4,7 @@
 
 using JoystickHand = frc::GenericHID::JoystickHand;
 static constexpr double kDeadband = 0.02;
-//TODO add adjust in tank and curvature drive if we were ever to use them
+// TODO add adjust in tank and curvature drive if we were ever to use them
 TankControls Controls::Get_TankDrive()
 {
   TankControls tankcontrols;
@@ -55,4 +55,27 @@ double Controls::adjust(double controller)
 {
   double value = deadband(controller, kDeadband);
   return cubecontrols(value);
+}
+
+LiftControls Controls::Get_LiftControls()
+{
+  bool up = controller1.GetYButton();
+  bool down = controller1.GetAButton();
+
+  if (up && down)
+  {
+    return LiftControls::Stop;
+  }
+  else if (up)
+  {
+    return LiftControls::Up;
+  }
+  else if (down)
+  {
+    return LiftControls::Down;
+  }
+  else
+  {
+    return LiftControls::Stop;
+  }
 }
