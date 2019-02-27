@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Wiring.h"
 #include <frc/XboxController.h>
 
 struct TankControls
@@ -37,7 +38,7 @@ class Controls
 
 
  private:
-  frc::XboxController controller1{0};
+  frc::XboxController controller1{controller::main_controller};
   double deadband(double controller, double deadband);
   double cubecontrols(double controller);
   double adjust(double controller);

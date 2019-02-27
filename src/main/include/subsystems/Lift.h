@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Wiring.h"
 #include <frc/DigitalInput.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/Victor.h>
@@ -13,10 +15,10 @@ class Lift : public frc::Subsystem
   Lift();
 
  private:
-  frc::Victor left_victor{5};
-  frc::Victor right_victor{6};
+  frc::Victor left_victor{PWM::left_liftmotor};
+  frc::Victor right_victor{PWM::right_liftmotor};
   frc::SpeedControllerGroup victors{left_victor, right_victor};
   // These limit switches are normally closed
-  frc::DigitalInput down_switch{7};
-  frc::DigitalInput up_switch{8};
+  frc::DigitalInput down_switch{DIO::down_liftswitch};
+  frc::DigitalInput up_switch{DIO::up_liftswitch};
 };
