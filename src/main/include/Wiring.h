@@ -10,6 +10,11 @@ namespace PWM
     // For lift motors
     constexpr int left_liftmotor = 5;
     constexpr int right_liftmotor = 6;
+    // For claw motors
+    constexpr int finger_motor1 = 0;
+    constexpr int finger_motor2 = 7;
+    constexpr int finger_motor3 = 8;
+    constexpr int shaft_motor = 9;
 
 }
 
@@ -18,6 +23,9 @@ namespace DIO
     // For lift limit switches
     constexpr int down_liftswitch = 7;
     constexpr int up_liftswitch = 8;
+    // For claw limit switches
+    constexpr int open_clawswitch = 0;
+    constexpr int close_clawswitch = 1;
 }
 
 namespace controller
