@@ -1,27 +1,31 @@
 #pragma once
 
-#include "Wiring.h"
-#include <frc/Talon.h>
 #include <frc/DigitalInput.h>
+#include <frc/SpeedControllerGroup.h>
+#include <frc/Talon.h>
 #include <frc/commands/Subsystem.h>
 
+#include "Wiring.h"
 
 class Claw : public frc::Subsystem
 {
-    public:
-    void Open();
-    void Close();
-    void Pinch();
-    void IntoHatch();
+ public:
+  void Open();
+  void Close();
+  void StopShaft();
 
+  void Suck();
+  void Expel();
+  void StopFingers();
 
-    private:
-    frc::Talon finger_motor1{PWM::finger_motor1};
-    frc::Talon finger_motor2{PWM::finger_motor2};
-    frc::Talon finger_motor3{PWM::finger_motor3};
-    frc::Talon shaft_motor{PWM::shaft_motor};
+ private:
+  frc::Talon finger_motor1{PWM::finger_motor1};
+  frc::Talon finger_motor2{PWM::finger_motor2};
+  frc::Talon finger_motor3{PWM::finger_motor3};
+  frc::SpeedControllerGroup finger_group{finger_motor1, finger_motor2, finger_motor3};
 
-    frc::DigitalInput open_switch{DIO::open_clawswitch};
-    frc::DigitalInput close_switch{DIO::close_clawswitch};
-    
+  frc::Talon shaft_motor{PWM::shaft_motor};
+
+  frc::DigitalInput open_switch{DIO::open_clawswitch};
+  frc::DigitalInput close_switch{DIO::close_clawswitch};
 };
