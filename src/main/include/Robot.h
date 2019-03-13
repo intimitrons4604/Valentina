@@ -5,12 +5,15 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include "commands/LiftCommand.h"
-#include "subsystems/Lift.h"
 
 #include "Controls.h"
 #include "commands/DriveCommand.h"
+#include "commands/LiftCommand.h"
+#include "commands/ClawCommand.h"
 #include "subsystems/DriveTrain.h"
+#include "subsystems/Lift.h"
+#include "subsystems/Claw.h"
+
 class Robot : public frc::TimedRobot
 {
  public:
@@ -30,4 +33,6 @@ class Robot : public frc::TimedRobot
   std::unique_ptr<DriveCommand> drivecommand;
   std::shared_ptr<Lift> lift;
   std::unique_ptr<LiftCommand> liftcommand;
+  std::shared_ptr<Claw> claw;
+  std::unique_ptr<ClawCommand> clawcommand;
 };

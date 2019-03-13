@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Wiring.h"
 #include <frc/XboxController.h>
+
+#include "Wiring.h"
 
 struct TankControls
 {
@@ -20,12 +21,22 @@ struct ArcadeControls
 {
   double xSpeed;
   double zRotation;
-
 };
 
 enum class LiftControls
 {
-  Stop, Down, Up
+  Stop,
+  Down,
+  Up
+};
+
+enum class ClawControls
+{
+  Open,
+  Close,
+  PinchBall,
+  GetPanel,
+  Stop
 };
 
 class Controls
@@ -35,7 +46,7 @@ class Controls
   CurvatureControls Get_CurvatureDrive();
   ArcadeControls Get_ArcadeDrive();
   LiftControls Get_LiftControls();
-
+  ClawControls Get_ClawControls();
 
  private:
   frc::XboxController controller1{controller::main_controller};

@@ -5,11 +5,14 @@
 #include <frc/Talon.h>
 #include <frc/commands/Subsystem.h>
 
+
 #include "Wiring.h"
 
 class Claw : public frc::Subsystem
 {
  public:
+  Claw();
+
   void Open();
   void Close();
   void StopShaft();

@@ -3,6 +3,10 @@
 static constexpr double k_shaft_speed = 0.32;
 static constexpr double k_finger_speed = 0.32;
 
+Claw::Claw() : frc::Subsystem("Claw")
+{
+}
+
 void Claw::Open()
 {
   if (open_switch.Get())

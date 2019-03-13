@@ -79,3 +79,26 @@ LiftControls Controls::Get_LiftControls()
     return LiftControls::Stop;
   }
 }
+
+ClawControls Controls::Get_ClawControls()
+{
+  bool close = controller1.GetBumper(JoystickHand::kLeftHand);
+  bool open = controller1.GetBumper(JoystickHand::kRightHand);
+
+  if (open && close)
+  {
+    return ClawControls::Stop;
+  }
+  else if (open)
+  {
+    return ClawControls::Open;
+  }
+  else if (close)
+  {
+    return ClawControls::Close;
+  }
+  else
+  {
+    return ClawControls::Stop;
+  }
+}

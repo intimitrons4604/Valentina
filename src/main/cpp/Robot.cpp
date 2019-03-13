@@ -10,9 +10,13 @@ void Robot::RobotInit()
   drivecommand = std::make_unique<DriveCommand>(controls, drivetrain);
   lift = std::make_shared<Lift>();
   liftcommand = std::make_unique<LiftCommand>(controls, lift);
+  claw = std::make_shared<Claw>();
+  clawcommand = std::make_unique<ClawCommand>(controls, claw);
+
 
   drivetrain->SetDefaultCommand(drivecommand.get());
   lift->SetDefaultCommand(liftcommand.get());
+  claw->SetDefaultCommand(clawcommand.get());
 }
 
 /**
