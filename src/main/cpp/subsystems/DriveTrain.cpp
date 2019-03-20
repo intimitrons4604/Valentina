@@ -1,11 +1,21 @@
 #include "subsystems/DriveTrain.h"
 static constexpr double kSpeedLimit = 0.5;
-DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain")
+static const char* kSubSystemName = "DriveTrain";
+
+DriveTrain::DriveTrain() : frc::Subsystem(kSubSystemName)
 {
   drive_motors.SetDeadband(0);
-  
+
   left_motors.SetInverted(true);
   right_motors.SetInverted(true);
+
+  left_front.SetName(kSubSystemName, "LeftFrontMotor");
+  left_back.SetName(kSubSystemName, "LeftBackMotor");
+  left_motors.SetName(kSubSystemName, "LeftMotors");
+  right_front.SetName(kSubSystemName, "RightFrontMotor");
+  right_back.SetName(kSubSystemName, "RightBackMotor");
+  right_motors.SetName(kSubSystemName, "RightMotors");
+  drive_motors.SetName(kSubSystemName, "DriveMotors");
 }
 
 void DriveTrain::TankDrive(double leftSpeed, double rightSpeed)
