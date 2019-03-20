@@ -1,5 +1,7 @@
 #include "Robot.h"
 
+#include <cameraserver/CameraServer.h>
+
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
@@ -13,10 +15,13 @@ void Robot::RobotInit()
   claw = std::make_shared<Claw>();
   clawcommand = std::make_unique<ClawCommand>(controls, claw);
 
-
   drivetrain->SetDefaultCommand(drivecommand.get());
   lift->SetDefaultCommand(liftcommand.get());
   claw->SetDefaultCommand(clawcommand.get());
+
+  // camera stuff
+  frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
+  frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
 }
 
 /**
