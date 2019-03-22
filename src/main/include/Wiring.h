@@ -26,6 +26,10 @@ namespace DIO
     // For claw limit switches
     constexpr int open_clawswitch = 0;
     constexpr int close_clawswitch = 1;
+    // For encoder
+    constexpr int encoderA = 2;
+    constexpr int encoderB = 3;
+    constexpr int indexchannel = 3;
 }
 
 namespace controller

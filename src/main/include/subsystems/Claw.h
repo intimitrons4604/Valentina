@@ -1,10 +1,11 @@
 #pragma once
 
+#include <frc/Counter.h>
 #include <frc/DigitalInput.h>
+#include <frc/Encoder.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/Talon.h>
 #include <frc/commands/Subsystem.h>
-
 
 #include "Wiring.h"
 
@@ -31,4 +32,7 @@ class Claw : public frc::Subsystem
 
   frc::DigitalInput open_switch{DIO::open_clawswitch};
   frc::DigitalInput close_switch{DIO::close_clawswitch};
+
+  frc::Encoder encoder{DIO::encoderA, DIO::encoderB};
+  frc::Counter indexchannel{DIO::indexchannel};
 };
