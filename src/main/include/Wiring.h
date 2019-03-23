@@ -29,7 +29,7 @@ namespace DIO
     // For encoder
     constexpr int encoderA = 2;
     constexpr int encoderB = 3;
-    constexpr int indexchannel = 3;
+    constexpr int indexchannel = 5;
 }
 
 namespace controller

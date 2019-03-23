@@ -13,6 +13,8 @@ Claw::Claw() : frc::Subsystem(kSubsystemName)
   shaft_motor.SetName(kSubsystemName, "ShaftMotor");
   open_switch.SetName(kSubsystemName, "OpenSwitch");
   close_switch.SetName(kSubsystemName, "CloseSwitch");
+  encoder.SetName(kSubsystemName, "ClawEncoder");
+  indexchannel.SetName(kSubsystemName, "ClawEncoderIndex");
 }
 
 void Claw::Open()
