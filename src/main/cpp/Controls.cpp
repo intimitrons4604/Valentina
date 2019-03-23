@@ -4,12 +4,11 @@
 
 using JoystickHand = frc::GenericHID::JoystickHand;
 static constexpr double kDeadband = 0.02;
-// TODO add adjust in tank and curvature drive if we were ever to use them
 TankControls Controls::Get_TankDrive()
 {
   TankControls tankcontrols;
-  tankcontrols.leftSpeed = controller1.GetY(JoystickHand::kLeftHand);
-  tankcontrols.rightSpeed = controller1.GetY(JoystickHand::kRightHand);
+  tankcontrols.leftSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand) * -1);
+  tankcontrols.rightSpeed = adjust(controller1.GetY(JoystickHand::kRightHand) * -1);
 
   return tankcontrols;
 }
@@ -17,8 +16,8 @@ TankControls Controls::Get_TankDrive()
 CurvatureControls Controls::Get_CurvatureDrive()
 {
   CurvatureControls curvaturecontrols;
-  curvaturecontrols.xSpeed = controller1.GetY(JoystickHand::kLeftHand);
-  curvaturecontrols.zRotation = controller1.GetX(JoystickHand::kRightHand);
+  curvaturecontrols.xSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand) * -1);
+  curvaturecontrols.zRotation = adjust(controller1.GetX(JoystickHand::kRightHand));
   curvaturecontrols.isQuickTurn = controller1.GetBumper(JoystickHand::kLeftHand);
 
   return curvaturecontrols;
@@ -27,7 +26,7 @@ CurvatureControls Controls::Get_CurvatureDrive()
 ArcadeControls Controls::Get_ArcadeDrive()
 {
   ArcadeControls arcadecontrols;
-  arcadecontrols.xSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand));
+  arcadecontrols.xSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand) * -1);
   arcadecontrols.zRotation = adjust(controller1.GetX(JoystickHand::kRightHand));
 
   return arcadecontrols;

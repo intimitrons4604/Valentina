@@ -6,9 +6,6 @@ DriveTrain::DriveTrain() : frc::Subsystem(kSubSystemName)
 {
   drive_motors.SetDeadband(0);
 
-  left_motors.SetInverted(true);
-  right_motors.SetInverted(true);
-
   left_front.SetName(kSubSystemName, "LeftFrontMotor");
   left_back.SetName(kSubSystemName, "LeftBackMotor");
   left_motors.SetName(kSubSystemName, "LeftMotors");
