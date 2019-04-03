@@ -1,10 +1,14 @@
 #include "subsystems/Lift.h"
 
-static constexpr double kSpeed = 0.5;
+//original speed is 0.5, but no limit switches are currently connected. Test speed is 0.1, possibly 0.2
+static constexpr double kSpeed = 0.1;
 static const char* kSubsystemName = "Lift";
+
+
 
 Lift ::Lift() : frc::Subsystem(kSubsystemName)
 {
+  right_victor.SetInverted(true);
   left_victor.SetName(kSubsystemName, "LeftLiftMotor");
   right_victor.SetName(kSubsystemName, "RightLiftMotor");
   victors.SetName(kSubsystemName, "LiftMotorGroup");
