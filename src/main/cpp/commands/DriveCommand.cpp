@@ -14,7 +14,7 @@ void DriveCommand::Initialize()
 void DriveCommand::Execute()
 {
   auto control = controls->Get_ArcadeDrive();
-  drivetrain->ArcadeDrive(control.xSpeed, control.zRotation);
+  drivetrain->ArcadeDrive(control.xSpeed, control.zRotation, control.turbo);
 }
 
 bool DriveCommand::IsFinished()

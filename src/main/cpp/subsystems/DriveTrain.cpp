@@ -29,10 +29,23 @@ void DriveTrain::CurvatureDrive(double xSpeed, double zRotation, bool isQuickTur
   drive_motors.CurvatureDrive(xSpeedLimit, zSpeedLimit, isQuickTurn);
 }
 
-void DriveTrain::ArcadeDrive(double xSpeed, double zRotation)
+void DriveTrain::ArcadeDrive(double xSpeed, double zRotation, bool turbo)
 {
-  double xSpeedLimit = xSpeed * kSpeedLimit;
-  double zSpeedLimit = zRotation * kSpeedLimit;
+  double xSpeedLimit = 0;
+  double zSpeedLimit = 0;
+  if (turbo)
+  {
+    xSpeedLimit = xSpeed;
+    zSpeedLimit = zRotation;
+  } 
+  else
+  {
+    xSpeedLimit = xSpeed * kSpeedLimit;
+    zSpeedLimit = zRotation * kSpeedLimit;
+  }
+
+
+
   drive_motors.ArcadeDrive(xSpeedLimit, zSpeedLimit, false);
 }
 

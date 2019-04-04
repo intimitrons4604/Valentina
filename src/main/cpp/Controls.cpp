@@ -28,6 +28,7 @@ ArcadeControls Controls::Get_ArcadeDrive()
   ArcadeControls arcadecontrols;
   arcadecontrols.xSpeed = adjust(controller1.GetY(JoystickHand::kLeftHand) * -1);
   arcadecontrols.zRotation = adjust(controller1.GetX(JoystickHand::kRightHand));
+  arcadecontrols.turbo = controller1.GetTriggerAxis(JoystickHand::kRightHand) >= 0.8;
 
   return arcadecontrols;
 }

@@ -14,7 +14,7 @@ class DriveTrain : public frc::Subsystem
 
   void CurvatureDrive(double xSpeed, double zRotation, bool isQuickTurn);
 
-  void ArcadeDrive(double xSpeed, double zRotation);
+  void ArcadeDrive(double xSpeed, double zRotation, bool turbo);
 
   void Stop();
 

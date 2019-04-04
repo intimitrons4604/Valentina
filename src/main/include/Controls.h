@@ -21,6 +21,7 @@ struct ArcadeControls
 {
   double xSpeed;
   double zRotation;
+  bool turbo;
 };
 
 enum class LiftControls
